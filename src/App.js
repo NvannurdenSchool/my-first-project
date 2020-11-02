@@ -54,11 +54,10 @@ class App extends Component {
     });
 
     return (
-      // console.log("asdfa[osidnvoaisndfpobn"),
       <div className="App">
         <h1 className="header">Kitchen Inventory</h1>
 
-        <input placeholder="Add New Item" value={this.state.inventoryInput} onChange={e => this.handleInputChange(e.target.value)}/>
+        <input className="input-bar" placeholder="Add New Item" value={this.state.inventoryInput} onChange={e => this.handleInputChange(e.target.value)}/>
 
         <button className="button" onClick={this.handleAddItem}>
           Add
@@ -68,7 +67,7 @@ class App extends Component {
         <div className="items-needed">
           Items Needed From Store
         </div>
-        <input placeholder="Add New Item" value={this.state.storeInput} onChange={e => this.handleStoreInputChange(e.target.value)}/>
+        <input className="input-bar" placeholder="Add New Item" value={this.state.storeInput} onChange={e => this.handleStoreInputChange(e.target.value)}/>
         <button className="second-button" onClick={this.handleAddStoreItem}>
           Add
         </button>
