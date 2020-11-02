@@ -1,7 +1,8 @@
-import Axios from "axios";
+// import Axios from "axios";
 import React, { Component } from "react";
 import "./App.css";
 import AddItem from "./Components/addItem";
+import AddStoreItem from "./Components/addStoreItem";
 
 class App extends Component {
   constructor() {
@@ -9,57 +10,69 @@ class App extends Component {
 
     this.state = {
       list: [],
-      input: ""
+      storeList: [],
+      inventoryInput: "",
+      storeInput: ""
     };
 
     this.handleAddItem = this.handleAddItem.bind(this);
+    this.handleAddStoreItem = this.handleAddStoreItem.bind(this);
   }
 
   handleInputChange(value) {
-    this.setState({ input: value });
+    this.setState({ inventoryInput: value });
   }  
 
   handleAddItem() {
-    console.log("calling handleAddItem");
-    console.log(this.state.input);
     this.setState({
-      list: [...this.state.list, this.state.input],
-      input: ""
+      list: [...this.state.list, this.state.inventoryInput],
+      inventoryInput: ""
     });
   }
 
-  // removeItem = (index) => {
-  //   .delete(`/api/item/${index}`)
-  //   .then((res) => {
-  //     this.setState({item: res.data});
-  //   })
-  //   .catch((err) => console.log(err));
-  // }
+  handleStoreInputChange(value) {
+    this.setState({ storeInput: value });
+  }  
+
+  handleAddStoreItem() {
+    console.log("asdfasdfasdf");
+    console.log(this.state.storeInput);
+    this.setState({
+      storeList: [...this.state.storeList, this.state.storeInput],
+      storeInput: ""
+    });
+  }
+
 
 
   render() {
     let list = this.state.list.map((element, index) => {
       return <AddItem key={index} task={element} />
     });
+    let storeList = this.state.storeList.map((element, index) => {
+      return <AddStoreItem key={index} task={element} />
+    });
 
     return (
+      // console.log("asdfa[osidnvoaisndfpobn"),
       <div className="App">
-        <header className="header">
-          <h1>Kitchen Inventory</h1>
-        </header>
-        <div>
-          <input className="input-bar" placeholder="Add New Item" value={this.state.input} onChange={e => this.handleInputChange(e.target.value)}/>
+        <h1 className="header">Kitchen Inventory</h1>
 
-          <button className="button" onClick={this.handleAddItem} >Add</button>
-        </div>
+        <input placeholder="Add New Item" value={this.state.inventoryInput} onChange={e => this.handleInputChange(e.target.value)}/>
 
-        <br />
-        {list}
+        <button className="button" onClick={this.handleAddItem}>
+          Add
+        </button>
+        <div className="kitchen-output">{list}</div>
+        
         <div className="items-needed">
-          <form>
-            Items Needed From Store
-          </form>
+          Items Needed From Store
         </div>
+        <input placeholder="Add New Item" value={this.state.storeInput} onChange={e => this.handleStoreInputChange(e.target.value)}/>
+        <button className="second-button" onClick={this.handleAddStoreItem}>
+          Add
+        </button>
+        <div className="store-output">{storeList}</div>
       </div>
     );
   }
